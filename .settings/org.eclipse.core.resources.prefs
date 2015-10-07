@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//src/com/shefron/module/codec/SBase64.java=UTF-8
+encoding//src/com/shefron/module/jdbc/ProcedureTester.java=UTF-8
+encoding//src/com/shefron/module/mail=UTF-8
+encoding//src/com/shefron/module/mail/MailAuthenticator.java=UTF-8
+encoding//src/com/shefron/module/nio=UTF-8
+encoding//src/com/shefron/module/rmi=UTF-8
+encoding//src/com/shefron/module/thread=UTF-8
+encoding//src/com/shefron/module/udp=UTF-8
+encoding//src/com/shefron/test=UTF-8
+encoding//src/com/shefron/test/TestTimeout.java=GBK
+encoding//src/org/shefron/utils/Native2AsciiUtils.java=GBK
+encoding/<project>=GBK
+encoding/src=UTF-8

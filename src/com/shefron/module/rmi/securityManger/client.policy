@@ -1,0 +1,12 @@
+#功能一
+grant{
+    permission java.net.SocketPermission "*:1024-65535","connect";
+};
+#功能二
+grant{
+    permission java.net.SocketPermission "myserver.com:1024-65535","connect";
+};
+#功能三
+grant{
+    permission java.security.AllPermission;
+};

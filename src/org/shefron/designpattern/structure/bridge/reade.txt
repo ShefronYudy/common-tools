@@ -1,0 +1,3 @@
+Bridge模式又叫柄体（handle-body）模式:
+          当一个类的子类需要扩展时，如果要在两个维度进行扩展，
+那么就可以使用Bridge模式又叫柄体（handle-body）模式。

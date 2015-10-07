@@ -1,2 +1,2 @@
 # common-tools
-java common-tools
+java common utils

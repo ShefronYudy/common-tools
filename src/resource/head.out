@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title>@@title@@ 中国广电艺术网</title> 
+  <meta name="keywords" content="@@keywords@@,中广艺术,中广艺术网,中国广电艺术网,作品赏析,书画中国,根艺,书画新闻,书画资讯,城市,书画名家大讲堂,娱乐" /> 
+  <meta name="description" content="@@describe@@ 中国广电艺术网" /> 
+  <META name="author" content="中国广电艺术网（简称中广艺术网）">
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/page_style.css" /> 
+ </head> 
+ <body> 
+<!-- logo --> 
+<iframe align="center" src="../../logo/index_logo.html" width="970px" height="145px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+<center>
+<div style="width:970px;display:block;">
+	<div id="pubTitle"><font color="#000000" size="+2"><strong><br />@@title@@<br /></strong></font><br /></div>
+	<div id="pubDesc"><span><font color="#999999" size="-1">来源：中国广电艺术网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：@@author@@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：@@date@@ 10:12</font></span></div>
