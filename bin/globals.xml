@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="GBK"?>
+<global>
+<!--HP平台工单附件上传配置 -->
+	<ovsm>
+		<host>10.32.2.250</host>
+		<port>13080</port>
+		<username>falcon</username>
+		<password>1</password>
+	</ovsm>
+<!-- 普元平台工单附件ftp配置 -->
+	<ftp>
+		<url>127.0.0.1</url>
+		<port>21</port>
+		<url>sftp://10.0.3.183</url>
+		<port>22</port>
+		<user>bomcbp</user>
+		<password>bomcbp</password>
+		<encoding>utf-8</encoding>
+		<srcpath>/</srcpath>
+	</ftp>
+<!-- 知识工单附件ftp配置 -->
+	<ftp_knowl>
+		<url>10.32.1.79</url>
+		<port>21</port>
+		<user>bomckm</user>
+		<password>bomckm</password>
+		<encoding>gb2312</encoding>
+		<srcpath>/bomckm/attaches</srcpath>
+	</ftp_knowl>
+	<ftp-put>
+		<url>127.0.0.1</url>
+		<port>21</port>
+		<!-- <url>sftp://10.0.3.183</url>
+		<port>22</port> -->
+		<user>ipbp</user>
+		<password>ipbp</password>
+		<encoding>gb2312</encoding>
+		<srcpath>/opt/bomcbpserver/bomc-app/ftptest</srcpath>
+	</ftp-put>
+<!-- trap 告警配置 -->
+	<snmp>
+	     <!--  接收方IP -->
+		<destip>10.87.21.104</destip> -->
+		<port>162</port>
+		<community>public</community>
+		<!--  发送方IP -->
+		<srcip>10.87.21.111</srcip>
+		<nename>10.87.21.111</nename>
+		<alarmsev>3</alarmsev>
+	</snmp>
+<!-- 短信告警配置，多个手机号以逗号隔开 -->
+	<sms>
+		<tel>13810023891,15810023897</tel>
+		<safetel>1234567,7890123</safetel>
+		<!-- 2013-07-24 smp 文件类型配置 -->
+		<smptype>SMPSR,SMPGD,SMFWC,SMPOR,SMPLG,SMPLD,SMPLF,SMXDM</smptype>
+		<!-- 2013-07-23 河南新增smp与安全分开发短信 -->
+		<smptel>1234567,7890123</smptel>
+		<reactfile>1234567,789012333</reactfile>
+		<!-- 海南接收集团下发文件后发送短信号码 -->
+		<!-- >CHK-CPR-tel>13810023892,15810023892</CHK-CPR-tel-->
+		<!--chk--><!-- hubei -->
+			<!-- smsflag>2</smsflag--><!--1:true,0:false  -->
+			<!-- dbname>lnovsm</dbname>
+			<sql>select u.contact_phone
+				from cm3rm1 c
+				inner join contctsm1 u on c.assigned_to=u.contact_name
+				where c."NUMBER" like '%_id_%'</sql>
+		</chk-->
+		<chk><!-- EOS -->
+			<smsflag>1</smsflag><!--1:true,0:false  -->
+			<dbname>lnovsm</dbname>
+			<sql>SELECT u.mobile
+  				FROM gaus_userinfo u
+ 				WHERE u.userid IN
+  			     (
+  			      SELECT m.s_create_man FROM ipwf_proc_chg_main m WHERE m.s_seq_id = '_id_')</sql>
+		</chk>
+		<cpr><!-- hainan -->
+			<smsflag>1</smsflag><!-- 1:true,0:false  -->
+			<dbname>lnovsm</dbname>
+			<sql>select t.mobile from gaus_userinfo t where t.name='_recver'</sql>
+		</cpr>
+	</sms>
+	<pro>
+		<value>371</value>
+		<name>河南移动</name>
+		<!-- 集团TLQ临时上报目录 -->
+		<tempfilepath>E:\temp\temp</tempfilepath>
+		<!-- 集团TLQ上报目录 -->
+		<filePath>E:\temp\sndfile</filePath>
+		<!-- 集团TLQ下发目录 -->
+		<recvpath>E:\temp\rcvfile</recvpath>
+		<!-- V401源文件生成路径 -->
+		<srcpath>E:\temp\srcfile</srcpath>
+		<!-- V401回执文件存放路径 -->
+		<backpath>E:\temp\backfile</backpath>
+
+		<!--<sendfile0>SENDFILE0</sendfile0>
+		<rcvfile0>RCVFILE0</rcvfile0>
+		<sendbuf0>SENDMSG0</sendbuf0>
+		<rcvbuf0>SndMsg0</rcvbuf0>
+		<sendfile1>SENDFILE1</sendfile1>
+		<rcvfile1>RCVFILE1</rcvfile1>
+		<sendbuf1>SENDMSG1</sendbuf1>
+		<rcvbuf1>SndMsg1</rcvbuf1>
+		<recvtimeout>10</recvtimeout>
+		<eventtimeout>10</eventtimeout>
+		<sleeptime>4</sleeptime>
+		<ftpuser>ipbp</ftpuser>
+		<ftppassword>ipbp</ftppassword>-->
+		<!--告警存储过程开关：1为执行；0为不执行-->
+		<dbtag_fault>0</dbtag_fault>
+		<!--性能小时粒度存储过程开关：1为执行；0为不执行-->
+		<dbtag_perfm_hour>0</dbtag_perfm_hour>
+		<!--性能天粒度存储过程开关：1为执行；0为不执行-->
+		<dbtag_perfm_day>0</dbtag_perfm_day>
+		<!--性能月粒度存储过程开关：1为执行；0为不执行-->
+		<dbtag_perfm_mon>0</dbtag_perfm_mon>
+		<!--性能季度粒度存储过程开关：1为执行；0为不执行-->
+		<dbtag_perfm_season>0</dbtag_perfm_season>
+		<!--告警数据库级校验开关：1为执行；0为不执行-->
+		<fault_check_tag>0</fault_check_tag>
+		<!--性能数据库级校验开关：1为执行；0为不执行-->
+		<PM_check_tag>0</PM_check_tag>
+		<!--服务流程是否为HP平台 1为是，0为不是-->
+		<hptag>0</hptag>
+		<!--保障性程序开关：1为打开，0为关闭-->
+		<securetag>0</securetag>
+		<!-- 配置项上报前检查开关：1为打开，0为关闭-->
+		<checkCFGtag>1</checkCFGtag>
+		<backfilechecktime>1</backfilechecktime>
+		<cpralarm_turnon>on</cpralarm_turnon>
+		<!-- 优先级为紧急的协查单预警设置（提前预警的分钟数），单位：分钟， -->
+		<cpr-alarm-priority-emg>120</cpr-alarm-priority-emg>
+		<!-- 优先级为高的协查单预警设置（提前预警的分钟数），单位：分钟， -->
+		<cpr-alarm-priority-high>122</cpr-alarm-priority-high>
+		<!-- 0:beijing, 1:nanfang, 2:beijng and nanfang-->
+		<!-- <checkcenter>2</checkcenter> -->
+		<execsh>0</execsh>
+		<shell>notepad.exe</shell>
+		<!-- 短信告警表所在的数据库 -->
+		<db_value>FMS</db_value>
+		<reactfile-port>19018</reactfile-port>
+		<!-- RE文件中有错误时，是否只发送一条短信,是：true;否：fasle -->
+		<re_one_alarm>true</re_one_alarm>
+		<!-- 安全文件是否允许重复上传 1:是    0:否 -->
+		<resendsafeflag>1</resendsafeflag>
+		<!-- 2013-05-01 河南协查单附件短信告警通知 1:是 0:否 -->
+		<cprattachflag>1</cprattachflag>
+		<!--2013-12-16 河南  数据库操作超时配置           单位：秒 -->
+		<db-timeout>300</db-timeout>
+	</pro>
+	<project>
+		<name>BOMC</name>
+	</project>
+
+<!-- 数据库连接配置 -->
+	<database>
+		<default>dnmsapp</default>
+		<dnmsapp>
+			<trace>false</trace>
+			<dbType>0</dbType>
+			<dbDriver>oracle.jdbc.driver.OracleDriver</dbDriver>
+			<url>jdbc:oracle:thin:@10.12.1.171:1522:itsm</url>
+			  <!--<url>jdbc:oracle:thin:@localhost:1521:orcl</url>-->
+			<!-- url>jdbc:oracle:thin:@10.32.1.79:1521:itsm</url-->
+            <user>bomc</user>
+            <pwd>bomc</pwd>
+			<maxConn>80</maxConn>
+			<idleTimeout>120</idleTimeout>
+			<checkoutTimeout>1800</checkoutTimeout>
+	  </dnmsapp>
+	 <lnovsm>
+            <dbType>0</dbType>
+            <dbDriver>oracle.jdbc.driver.OracleDriver</dbDriver>
+            <url>jdbc:oracle:thin:@10.12.1.171:1522:itsm</url>
+            <user>bomcbp</user>
+            <pwd>bomcbp</pwd>
+            <maxConn>80</maxConn>
+            <idleTimeout>120</idleTimeout>
+            <checkoutTimeout>1800</checkoutTimeout>
+    </lnovsm>
+		<connectionProvider>
+			<!-- <className>com.boco.bomc.common.sql.DefaultConnectionAdaptor</className> -->
+			<className>com.boco.bomc.cdb.DefaultConnectionAdaptor</className>
+		</connectionProvider>
+	</database>
+
+</global>

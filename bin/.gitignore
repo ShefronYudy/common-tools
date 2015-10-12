@@ -1,6 +1,2 @@
-/resource
-/com
-/globals.xml
-/log4j.properties
-/org
-/resouce
+/com/
+/org/
