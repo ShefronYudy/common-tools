@@ -1,0 +1,3 @@
+rule net.sf.** org.logicalcobwebs.@1
+zap META-INF.A
+depkill *

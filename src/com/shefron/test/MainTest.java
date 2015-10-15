@@ -61,5 +61,11 @@ public class MainTest {
         }
 
     }
+    
+    @Test
+    public void testOneYearMsecs(){
+    	//一年的毫秒数
+    	System.out.println((long)(365.2425 * (24*60*60*1000)) );
+    }
 
 }
