@@ -1,6 +1,7 @@
 package com.shefron.test;
 
 import java.io.File;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -12,6 +13,13 @@ import sun.misc.BASE64Decoder;
  * Created by Administrator on 2014/11/22.
  */
 public class MainTest {
+	
+	private static HashMap<String,String> map = new HashMap<String,String>(){
+		{
+			put("","");
+		}
+	};
+	
 
     @Test
     public void testF(){
