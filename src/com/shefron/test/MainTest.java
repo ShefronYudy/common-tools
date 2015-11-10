@@ -2,6 +2,7 @@ package com.shefron.test;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -21,7 +22,7 @@ public class MainTest {
 	};
 	
 
-    @Test
+//    @Test
     public void testF(){
         File dir = new File("E:/temp/res");
         int i=1;
@@ -73,7 +74,10 @@ public class MainTest {
     @Test
     public void testOneYearMsecs(){
     	//一年的毫秒数
-    	System.out.println((long)(365.2425 * (24*60*60*1000)) );
+//    	System.out.println((long)(365.2425 * (24*60*60*1000)) );
+    	Random random = new Random();
+    	for(int i=0;i<100;i++)
+    	System.out.println(random.nextInt(1500));
     }
 
 }
