@@ -1,0 +1,42 @@
+package com.shefron.module.json;
+
+abstract interface JsonSupport {
+	public static final String CLASS_FIELD = "__class";
+	public static final String COLLECTION_CLASS_PFRIEX = "__collection_";
+	public static final String MAP_CLASS_PFRIEX = "__map_";
+	public static final String VALUE = "value";
+	public static final String METHOD_GET_PREFIX = "get";
+	public static final String METHOD_SET_PREFIX = "set";
+	public static final String METHOD_IS_PREFIX = "is";
+	public static final int GET_PREFIX_LEN = "get".length();
+	public static final int GET_PREFIX_LEN_1 = GET_PREFIX_LEN + 1;
+	public static final int IS_PREFIX_LEN = "is".length();
+	public static final int IS_PREFIX_LEN_1 = IS_PREFIX_LEN + 1;
+	public static final Object[] EMTPY_OBJ_ARR = new Object[0];
+	public static final char DOT = '.';
+	public static final char COLON = ':';
+	public static final char COMMA = ',';
+	public static final char OBJ_START = '{';
+	public static final char OBJ_END = '}';
+	public static final char ARR_START = '[';
+	public static final char ARR_END = ']';
+	public static final char SPACE = ' ';
+	public static final char BACKSLASH = '\\';
+	public static final char S_QUOT = '\'';
+	public static final char D_QUOT = '"';
+	public static final String S_COLON = ":";
+	public static final String S_COMMA = ",";
+	public static final String S_OBJ_END = "}";
+	public static final String S_ARR_END = "]";
+	public static final String QUOT_STR = "\"";
+	public static final String QUOT_STR_REP = "\\\"";
+	public static final String BACKSLASH_STR = "\\";
+	public static final String BACKSLASH_STR_REP = "\\\\";
+	public static final String UNICODE_START = "\\u";
+	public static final String STATIC_VALUE_NULL = "null";
+	public static final int VALUE_NULL_LEN = "null".length();
+	public static final String STATIC_VALUE_TRUE = "true";
+	public static final String STATIC_VALUE_FALSE = "false";
+	public static final String STATIC_VALUE_UNDEFINED = "undefined";
+	public static final Number DEFAULT_NUMBER_VALUE = Integer.valueOf(0);
+}
