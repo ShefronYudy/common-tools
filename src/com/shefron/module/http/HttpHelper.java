@@ -211,7 +211,7 @@ public class HttpHelper
           }
           if (jsonParams != null)
           {
-            connection.getOutputStream().write(jsonParams.getBytes());
+            connection.getOutputStream().write(jsonParams.getBytes("UTF-8"));
             connection.getOutputStream().flush();
           }
         }
