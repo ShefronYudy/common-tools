@@ -3,9 +3,7 @@ package org.shefron.test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.StringWriter;
@@ -257,11 +255,15 @@ public class TestMain {
 
 	}
 
+	@Test
 	public void testCharset() {
 		try {
 			FileCharsetDetector.CharsetObj charsetObj = FileCharsetDetector
-					.getPriorityCharset("E:/temp/res/SMMWQ_371_01DY_20140825_000_000.xml");
-			System.out.println(charsetObj);
+					.getPriorityCharset("C:/Users/Administrator/Desktop/ls/bomc-web-service98.11_6020-.201511172322_10.159.98.11.log");
+			
+//			charsetObj.getCharset();
+//			charsetObj.isFound();
+			System.out.println("charset:"+charsetObj);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -435,7 +437,7 @@ public class TestMain {
 		
 	}
 	
-	@Test
+//	@Test
 	public void testFile() throws Exception{
 		/** 创建临时文件  */
 		File tempFile = File.createTempFile(String.valueOf(System.currentTimeMillis()), ".tmp");
