@@ -8,6 +8,10 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
+import com.shefron.module.redis.JedisHelper;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPoolConfig;
 import sun.misc.BASE64Decoder;
 
 /**
@@ -71,13 +75,29 @@ public class MainTest {
 
     }
     
-    @Test
+//    @Test
     public void testOneYearMsecs(){
     	//一年的毫秒数
 //    	System.out.println((long)(365.2425 * (24*60*60*1000)) );
     	Random random = new Random();
     	for(int i=0;i<100;i++)
     	System.out.println(random.nextInt(1500));
+    }
+    
+    @Test
+    public void testRedisPassword(){
+    	String redisPassword = "Boco$bomc222";
+    	
+    	JedisHelper jedisHelper = new JedisHelper(new JedisPoolConfig(), "127.0.0.1", 6379, redisPassword);
+    	Jedis jedis = jedisHelper.getSingleClient();
+    	
+    	Long flag = jedis.rpush("bomc_key", "test-value");
+    	Long flag2 = jedis.rpush("bomc_key", "test-value2");
+    	System.out.println("flag:"+flag +" "+flag2);
+
+    	String bomc_key = jedis.lpop("bomc_key");
+    	System.out.println("value:"+bomc_key);
+    	
     }
 
 }
