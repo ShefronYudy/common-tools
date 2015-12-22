@@ -2,7 +2,6 @@ package com.shefron.test;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -26,7 +25,7 @@ public class MainTest {
 	};
 	
 
-//    @Test
+    @Test
     public void testF(){
         File dir = new File("E:/temp/res");
         int i=1;
@@ -39,17 +38,14 @@ public class MainTest {
                 file.renameTo(newFile);
 //            }
         }
-
     }
 
-//    @Test
+    @Test
     public void testCpuNum(){
-
         System.out.println("CPU 个数："+Runtime.getRuntime().availableProcessors() );
-
     }
 
-//    @Test
+    @Test
     public void testBase64(){
         BASE64Decoder decoder = new BASE64Decoder();
         try{
@@ -63,10 +59,9 @@ public class MainTest {
         }
     }
 
-//    @Test
+    @Test
     public void testImg(){
         File file = new File("E:/temp/res/2.jpg");
-
         try {
             ImageIO.read(file);
         }catch (Exception e){
@@ -75,13 +70,10 @@ public class MainTest {
 
     }
     
-//    @Test
+    @Test
     public void testOneYearMsecs(){
     	//一年的毫秒数
-//    	System.out.println((long)(365.2425 * (24*60*60*1000)) );
-    	Random random = new Random();
-    	for(int i=0;i<100;i++)
-    	System.out.println(random.nextInt(1500));
+    	System.out.println((long)(365.2425 * (24*60*60*1000)) );
     }
     
     @Test
@@ -97,7 +89,6 @@ public class MainTest {
 
     	String bomc_key = jedis.lpop("bomc_key");
     	System.out.println("value:"+bomc_key);
-    	
     }
 
 }
