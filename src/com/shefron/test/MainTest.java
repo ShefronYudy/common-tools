@@ -1,7 +1,11 @@
 package com.shefron.test;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +29,6 @@ public class MainTest {
 	};
 	
 
-    @Test
     public void testF(){
         File dir = new File("E:/temp/res");
         int i=1;
@@ -40,12 +43,10 @@ public class MainTest {
         }
     }
 
-    @Test
     public void testCpuNum(){
         System.out.println("CPU 个数："+Runtime.getRuntime().availableProcessors() );
     }
 
-    @Test
     public void testBase64(){
         BASE64Decoder decoder = new BASE64Decoder();
         try{
@@ -59,7 +60,6 @@ public class MainTest {
         }
     }
 
-    @Test
     public void testImg(){
         File file = new File("E:/temp/res/2.jpg");
         try {
@@ -70,13 +70,11 @@ public class MainTest {
 
     }
     
-    @Test
     public void testOneYearMsecs(){
     	//一年的毫秒数
     	System.out.println((long)(365.2425 * (24*60*60*1000)) );
     }
     
-    @Test
     public void testRedisPassword(){
     	String redisPassword = "Boco$bomc222";
     	
@@ -90,5 +88,50 @@ public class MainTest {
     	String bomc_key = jedis.lpop("bomc_key");
     	System.out.println("value:"+bomc_key);
     }
+    
+    private class SpoolDirectoryRunnable implements Runnable{
+    	private String[] keys;
+    	
+    	public SpoolDirectoryRunnable(String[] keys){
+    		this.keys = keys;
+    	}
+
+		@Override
+		public void run() {
+			System.out.println("begin ....");
+			System.out.println("keys = "+Arrays.asList(this.keys) );
+			try{
+				while(!Thread.interrupted() ){
+					Thread.sleep(3*1000);
+					System.out.println("end ....");
+					this.keys[0] = "3";
+					this.keys[1] = "4";
+					System.out.println("keys = "+Arrays.asList(this.keys) );
+					int i = 2/0;
+				}
+			}catch(Exception e){
+				System.out.println("error....");
+				e.printStackTrace();
+//				Throwables.propagate(e);
+			}
+		}
+    }
+    
+    @Test
+    public void testExecutor(){
+    	ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    	String[] keys = new String[]{"1","2"};
+    	Runnable runner = new SpoolDirectoryRunnable(keys);
+		executor.scheduleWithFixedDelay(runner, 0, 500, TimeUnit.MILLISECONDS);
+		
+		try{
+			Thread.sleep(20*1000);
+			System.out.println("The End!");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+    }
+    
+
 
 }
