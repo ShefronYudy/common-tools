@@ -15,7 +15,7 @@ public class JedisHelper {
 	private int redisTimeout = 2000;
 	private String redisPassword;
 	private int database = 0;
-//	private static final int DEFAULT_MAX_TRY = 5;
+	private static final int DEFAULT_MAX_TRY = 5;
 
 	public JedisHelper() {
 	}
@@ -60,7 +60,7 @@ public class JedisHelper {
 	}
 
 	public Jedis getResource() {
-		return getResource(5);
+		return getResource(DEFAULT_MAX_TRY);
 	}
 
 	public Jedis getResource(int maxTry) {
@@ -73,12 +73,12 @@ public class JedisHelper {
 
 		if ((jedis == null) || (!jedis.isConnected())) {
 			if (jedis != null) {
-				this.jedisPool.returnBrokenResource(jedis);
+				closeResource(jedis);
 			}
 
 			synchronized (this.jedisPool) {
 				try {
-					this.jedisPool.wait(1000L);
+					this.jedisPool.wait(200L);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 					return null;
@@ -95,16 +95,12 @@ public class JedisHelper {
 		return jedis;
 	}
 
-	public void returnResource(Jedis resource) {
-		this.jedisPool.returnResource(resource);
-
-		synchronized (this.jedisPool) {
-			this.jedisPool.notify();
+	public void closeResource(Jedis resource) {
+		try{
+			resource.close();
+		}catch(Exception e){
+			//ignore
 		}
-	}
-
-	public void returnBrokenResource(Jedis resource) {
-		this.jedisPool.returnBrokenResource(resource);
 	}
 
 	public JedisPoolConfig getJedisPoolConfig() {

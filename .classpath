@@ -56,5 +56,12 @@
 	<classpathentry kind="lib" path="lib/bsh-core-2.0b4.jar"/>
 	<classpathentry kind="lib" path="lib/jedis/jedis-2.7.3.jar"/>
 	<classpathentry kind="lib" path="lib/jedis/commons-pool2-2.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/c3p0-0.9.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/quartz-2.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/quartz-jobs-2.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/slf4j-log4j12-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/guava-16.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

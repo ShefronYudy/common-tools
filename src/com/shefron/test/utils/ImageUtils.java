@@ -278,7 +278,7 @@ public final class ImageUtils {
 			}
 		});
 
-		ImageUtils.mark2Image(files, "16_", "jpg", logoImage);
+		ImageUtils.mark2Image(files, "30_", "jpg", logoImage);
 
 		//压缩图片
 //		handleRGB(fileList);

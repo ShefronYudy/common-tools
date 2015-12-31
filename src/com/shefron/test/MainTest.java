@@ -2,7 +2,9 @@ package com.shefron.test;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -117,7 +119,6 @@ public class MainTest {
 		}
     }
     
-    @Test
     public void testExecutor(){
     	ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     	String[] keys = new String[]{"1","2"};
@@ -130,6 +131,98 @@ public class MainTest {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+    }
+    
+    private int timePoint = 0;
+    private long syncCycle = 5*60*1000;
+    private int flumeSize = 5;
+    private int currTimePoint = 38;
+    private long currTimeMillis = System.currentTimeMillis()-12*60*1000;
+    
+    private boolean isTimePoint(){
+		//检查调用周期
+		long currTime = -1;
+		int currMin;
+		Calendar today = Calendar.getInstance();
+		currTime = System.currentTimeMillis();
+		today.setTimeInMillis(currTime);
+		currMin = today.get(Calendar.MINUTE);
+		System.out.println("currMin = " + currMin);
+		if(currMin == this.currTimePoint){
+			return false;
+		}
+		
+		int _timePoint = this.timePoint;
+		int _intval = (int)syncCycle/1000/60;
+		for(int i=0; i<=flumeSize; i++){
+			_timePoint += (i==0?0:_intval);
+			_timePoint = (_timePoint>=60?_timePoint%60:_timePoint);
+			if(currMin == _timePoint){
+				System.out.println("timePoint : "+_timePoint+" done!");
+				this.currTimePoint = _timePoint;
+				this.currTimeMillis = System.currentTimeMillis();
+				return true;
+			}
+		}
+		long dltTime = System.currentTimeMillis() - this.currTimeMillis;
+		if(dltTime > this.syncCycle){
+			long n = dltTime/this.syncCycle;
+			this.currTimePoint += n*_intval;
+			this.currTimePoint = this.currTimePoint%60;
+			this.currTimeMillis = System.currentTimeMillis();
+			return true;
+		}
+		
+		return false;
+	}
+    
+    
+    public void testTimePoint(){
+    	while(true){
+    		while(!isTimePoint()){
+        		try{
+        			Thread.sleep(1000);
+        		}catch(Exception e){
+        			e.printStackTrace();
+        		}
+        	}
+    		
+    		try{
+    			Thread.sleep(100);
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}
+    		System.out.println("执行完毕：");
+    	}
+    	
+    }
+    
+	private long[] splitTotalTime(int num,long totalTime){
+		Random random = new Random();
+    	long[] points = new long[num];
+    	long _totalTime = totalTime;
+    	for(int i=0; i < num; i++){
+    		int seed = 0;
+    		if(i == 0){
+    			seed = (int)(_totalTime/2);
+    		}else{
+    			_totalTime -= points[i-1];
+    			seed = (int)(_totalTime/2);
+    		}
+    		points[i] = random.nextInt(seed);
+    	}
+    	
+    	points[num-1] = totalTime;
+    	for(int i=0; i < (num-1); i++){
+    		points[num-1] -= points[i];
+    	}
+    	return points;
+	}
+    
+    @Test
+    public void splitTime(){
+    	//[974, 606, 381, 385]
+    	System.out.println(Arrays.toString(splitTotalTime(6, 2346)));
     }
     
 
