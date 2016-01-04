@@ -54,7 +54,6 @@
 	<classpathentry kind="lib" path="lib/struts-2.3.16/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/struts-2.3.16/struts2-jfreechart-plugin-2.3.16.3.jar"/>
 	<classpathentry kind="lib" path="lib/bsh-core-2.0b4.jar"/>
-	<classpathentry kind="lib" path="lib/jedis/jedis-2.7.3.jar"/>
 	<classpathentry kind="lib" path="lib/jedis/commons-pool2-2.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/quartz/c3p0-0.9.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/quartz/log4j-1.2.16.jar"/>
@@ -63,5 +62,6 @@
 	<classpathentry kind="lib" path="lib/quartz/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/quartz/slf4j-log4j12-1.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/guava-16.0.jar"/>
+	<classpathentry kind="lib" path="lib/jedis/jedis-2.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

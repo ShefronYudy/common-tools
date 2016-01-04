@@ -135,9 +135,8 @@ public class MainTest {
     
     private int timePoint = 0;
     private long syncCycle = 5*60*1000;
-    private int flumeSize = 5;
     private int currTimePoint = 38;
-    private long currTimeMillis = System.currentTimeMillis()-12*60*1000;
+    private long currTimeMillis = System.currentTimeMillis()-6*60*1000;
     
     private boolean isTimePoint(){
 		//检查调用周期
@@ -154,7 +153,8 @@ public class MainTest {
 		
 		int _timePoint = this.timePoint;
 		int _intval = (int)syncCycle/1000/60;
-		for(int i=0; i<=flumeSize; i++){
+		int _sum = 60/_intval;
+		for(int i=0; i<_sum; i++){
 			_timePoint += (i==0?0:_intval);
 			_timePoint = (_timePoint>=60?_timePoint%60:_timePoint);
 			if(currMin == _timePoint){
@@ -176,7 +176,7 @@ public class MainTest {
 		return false;
 	}
     
-    
+    @Test
     public void testTimePoint(){
     	while(true){
     		while(!isTimePoint()){
@@ -219,7 +219,6 @@ public class MainTest {
     	return points;
 	}
     
-    @Test
     public void splitTime(){
     	//[974, 606, 381, 385]
     	System.out.println(Arrays.toString(splitTotalTime(6, 2346)));
