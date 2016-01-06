@@ -3,8 +3,10 @@ package com.shefron.test;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -227,7 +229,6 @@ public class MainTest {
     	System.out.println(Arrays.toString(splitTotalTime(6, 2346)));
     }
     
-    @Test
     public void testScheduledExecutorService(){
     	final java.util.concurrent.ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 		Runnable runnable = new Runnable() {
@@ -264,7 +265,25 @@ public class MainTest {
 				break;
 			}
 		}
+    }
+    
+    @Test
+    public void testTreeMap(){
+    	Comparator<String> comparator = new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				//顺序
+				return 1;//-1:逆序
+			}
+		};
 		
+    	TreeMap<String,String> map = new TreeMap<String,String>(comparator);
+    	
+    	map.put("3", "000");
+    	map.put("2", "000");
+    	map.put("1", "000");
+    	
+    	System.out.println(map);
     }
     
 

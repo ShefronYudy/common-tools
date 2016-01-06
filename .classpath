@@ -83,5 +83,8 @@
 	<classpathentry kind="lib" path="lib/spring-3.2/spring-web-3.2.10.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-3.2/spring-webmvc-3.2.10.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-3.2/spring-webmvc-portlet-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/json/jackson-annotations-2.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/json/jackson-core-2.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/json/jackson-databind-2.6.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
