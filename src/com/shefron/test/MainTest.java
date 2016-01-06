@@ -113,15 +113,19 @@ public class MainTest {
 				}
 			}catch(Exception e){
 				System.out.println("error....");
-				e.printStackTrace();
+//				e.printStackTrace();
+				this.keys = new String[]{"1","2"};
 //				Throwables.propagate(e);
 			}
 		}
     }
     
+    private String[] keys = new String[2];
+    
     public void testExecutor(){
     	ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    	String[] keys = new String[]{"1","2"};
+    	keys[0] = "1";
+    	keys[1] = "2";
     	Runnable runner = new SpoolDirectoryRunnable(keys);
 		executor.scheduleWithFixedDelay(runner, 0, 500, TimeUnit.MILLISECONDS);
 		
@@ -176,7 +180,6 @@ public class MainTest {
 		return false;
 	}
     
-    @Test
     public void testTimePoint(){
     	while(true){
     		while(!isTimePoint()){
@@ -222,6 +225,46 @@ public class MainTest {
     public void splitTime(){
     	//[974, 606, 381, 385]
     	System.out.println(Arrays.toString(splitTotalTime(6, 2346)));
+    }
+    
+    @Test
+    public void testScheduledExecutorService(){
+    	final java.util.concurrent.ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("handle ...");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println("done.");
+				executor.shutdown();
+			}
+		};
+		executor.schedule(runnable, 10, TimeUnit.SECONDS);
+		try {
+			//block until 30 secs later
+			executor.awaitTermination(30, TimeUnit.SECONDS);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		int i = 0;
+		while(true){
+			try {
+				i++;
+				System.out.println("#shutdown:"+executor.isShutdown());
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(i==80){
+				break;
+			}
+		}
+		
     }
     
 
