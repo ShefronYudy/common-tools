@@ -240,16 +240,16 @@ public class MainTest {
 					e.printStackTrace();
 				}
 				System.out.println("done.");
-				executor.shutdown();
 			}
 		};
 		executor.schedule(runnable, 10, TimeUnit.SECONDS);
-		try {
-			//block until 30 secs later
-			executor.awaitTermination(30, TimeUnit.SECONDS);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		executor.shutdown();
+//		try {
+//			//block until 30 secs later
+//			executor.awaitTermination(30, TimeUnit.SECONDS);
+//		} catch (InterruptedException e1) {
+//			e1.printStackTrace();
+//		}
 		
 		int i = 0;
 		while(true){
