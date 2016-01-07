@@ -80,25 +80,24 @@
 	<classpathentry kind="lib" path="lib/jsonrpc4j/jsonrpc4j-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/portlet/portlet2.0/portlet_20_Java14compliant.jar"/>
 	<classpathentry kind="lib" path="lib/jsonrpc4j/httpcore-nio-4.3.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-aop-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-aspects-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-beans-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-context-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-context-support-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-core-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-expression-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-framework-bom-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-instrument-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-instrument-tomcat-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-jdbc-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-jms-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-orm-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-oxm-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-struts-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-test-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-tx-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-web-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-webmvc-3.2.10.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-3.2/spring-webmvc-portlet-3.2.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-aop-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-aspects-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-beans-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-context-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-context-support-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-core-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-expression-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-instrument-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-instrument-tomcat-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-jdbc-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-jms-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-orm-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-oxm-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-struts-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-test-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-tx-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-web-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-webmvc-3.2.16.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-3.2/spring-webmvc-portlet-3.2.16.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
