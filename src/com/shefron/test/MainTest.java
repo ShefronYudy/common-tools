@@ -1,9 +1,14 @@
 package com.shefron.test;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.TreeMap;
@@ -12,13 +17,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileSystemView;
 
 import org.junit.Test;
 
 import com.shefron.module.redis.JedisHelper;
+import com.sun.management.OperatingSystemMXBean;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPoolConfig;
+import sun.management.ManagementFactoryHelper;
 import sun.misc.BASE64Decoder;
 
 /**
@@ -26,9 +34,10 @@ import sun.misc.BASE64Decoder;
  */
 public class MainTest {
 	
-	private static HashMap<String,String> map = new HashMap<String,String>(){
+	static HashMap<String,String> map = new HashMap<String,String>(){
+		private static final long serialVersionUID = 1L;
 		{
-			put("","");
+			put("A","123456");
 		}
 	};
 	
@@ -112,6 +121,7 @@ public class MainTest {
 					this.keys[1] = "4";
 					System.out.println("keys = "+Arrays.asList(this.keys) );
 					int i = 2/0;
+					System.out.println(i);
 				}
 			}catch(Exception e){
 				System.out.println("error....");
@@ -267,7 +277,6 @@ public class MainTest {
 		}
     }
     
-    @Test
     public void testTreeMap(){
     	Comparator<String> comparator = new Comparator<String>() {
 			@Override
@@ -286,6 +295,75 @@ public class MainTest {
     	System.out.println(map);
     }
     
+    public String formatFileSize(long fileS) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        if (fileS < 1024) {
+            fileSizeString = df.format((double) fileS) + "B";
+        } else if (fileS < 1048576) {
+            fileSizeString = df.format((double) fileS / 1024) + "K";
+        } else if (fileS < 1073741824) {
+            fileSizeString = df.format((double) fileS / 1048576) + "M";
+        } else {
+            fileSizeString = df.format((double) fileS / 1073741824) + "G";
+        }
+        return fileSizeString;
+    }
 
+    @Test
+    public void testDeviceInfo() throws UnknownHostException{
+    	DateFormat df = DateFormat.getDateTimeInstance();
+    	System.err.print("# Env ");
+		System.err.print("Host "+ InetAddress.getLocalHost().getHostName());
+		System.err.print(", "+df.format(new GregorianCalendar().getTime()));
+		System.err.print(", Java " + System.getProperty("java.runtime.version"));
+		System.err.print(", "+System.getProperty("os.name")+" "+System.getProperty("os.version"));
+		System.err.print(" on " + System.getProperty("os.arch"));
+		System.err.println();
+		
+		System.err.println("----------------------------------");
+		// 当前文件系统类
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        // 列出所有windows 磁盘
+        File[] fs = File.listRoots();
+        // 显示磁盘卷标
+        System.err.println("# disk ");
+        for (int i = 0; i < fs.length; i++) {
+            System.err.print(fsv.getSystemDisplayName(fs[i]));
+            System.err.print("总大小" + formatFileSize(fs[i].getTotalSpace()));
+            System.err.print("\t剩余" + formatFileSize(fs[i].getFreeSpace()));
+            System.err.print("\t已用" + formatFileSize(fs[i].getTotalSpace()-fs[i].getFreeSpace()));
+            System.err.println();
+        }
+        System.err.println("----------------------------------");
+        System.err.println("# jvm memory ");
+        Runtime runtime = Runtime.getRuntime();
+        System.err.print("总大小"+formatFileSize(runtime.totalMemory()));
+        System.err.print("\t剩余"+formatFileSize(runtime.freeMemory()) );
+        System.err.print("\tCPU核数"+runtime.availableProcessors() );
+        System.err.println();
+        System.err.println("----------------------------------");
+        System.err.println("# phy memory");
+        OperatingSystemMXBean osmxb = (OperatingSystemMXBean)ManagementFactoryHelper.getOperatingSystemMXBean();
+        long physicalFree = osmxb.getFreePhysicalMemorySize(); 
+        long physicalTotal = osmxb.getTotalPhysicalMemorySize(); 
+        long physicalUse = physicalTotal-physicalFree;
+        System.err.print("总大小"+formatFileSize(physicalTotal));
+        System.err.print("\t剩余"+formatFileSize(physicalFree) );
+        System.err.print("\t已用"+formatFileSize(physicalUse) );
+        System.err.println();
+        
+        System.err.println("----------------------------------");
+        System.err.println("# thread count");
+		// 获得线程总数
+		ThreadGroup parentThread;
+		for (parentThread = Thread.currentThread().getThreadGroup(); parentThread
+				.getParent() != null; parentThread = parentThread.getParent() )
+			;
+		int totalThread = parentThread.activeCount();
+		System.err.println("获得线程总数:" + totalThread);
+		System.err.println();
 
+		/** The other, see JMX java.lang.management */
+    }
 }

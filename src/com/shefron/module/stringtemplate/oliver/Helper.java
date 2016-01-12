@@ -36,7 +36,7 @@ import java.util.*;
 public class Helper {
 
 	public static String unifyNewlines(String source) {
-		final String regex = "\\r?\\n";
+		final String regex = "\\r?\\n";//eg:\n or \r\n
 		final String clearedSource = source.replaceAll(regex, "\n");
 		return clearedSource;
 	}
