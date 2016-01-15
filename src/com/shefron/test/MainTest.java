@@ -1,6 +1,11 @@
 package com.shefron.test;
 
+import java.io.ByteArrayInputStream;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -15,10 +20,12 @@ import java.util.TreeMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.GZIPInputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileSystemView;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.junit.Test;
 
 import com.shefron.module.redis.JedisHelper;
@@ -310,7 +317,6 @@ public class MainTest {
         return fileSizeString;
     }
 
-    @Test
     public void testDeviceInfo() throws UnknownHostException{
     	DateFormat df = DateFormat.getDateTimeInstance();
     	System.err.print("# Env ");
@@ -365,5 +371,47 @@ public class MainTest {
 		System.err.println();
 
 		/** The other, see JMX java.lang.management */
+    }
+    
+    @Test
+    public void deserialFile() throws IOException{
+    	FileInputStream in = new FileInputStream("D:/tmp/bomc.pf-node01-ngpfserver3.01141740.dat");
+    	int maxBlobLength = 100000000;
+    	
+    	ByteArrayOutputStream blob = null;
+		byte buf[] = new byte[Math.min(maxBlobLength, 8192)];
+		int blobLength = 0;
+		int n = 0;
+		do {
+			if ((n = in.read(buf, 0, Math.min(buf.length, maxBlobLength - blobLength))) == -1)
+				break;
+			if (blob == null)
+				blob = new ByteArrayOutputStream(n);
+			blob.write(buf, 0, n);
+			blobLength += n;
+			if (blobLength < maxBlobLength)
+				continue;
+			break;
+		} while (true);
+		if (blob == null){
+			System.out.println("null");
+		}
+		else{
+			ByteArrayInputStream bis = new ByteArrayInputStream(blob.toByteArray());
+			Object obj = null;
+			ObjectInputStream objIn = new ObjectInputStream(bis);
+			while (true){
+				try{
+					obj = objIn.readObject();
+					System.out.println("obj: "+obj);
+				}catch(EOFException e){
+					break;
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			objIn.close();
+			bis.close();
+		}
     }
 }
