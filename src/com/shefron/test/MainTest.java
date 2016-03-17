@@ -434,7 +434,7 @@ public class MainTest {
 		System.out.println(minStr);
     }
     
-    @Test
+//    @Test
     public void testTimeMills(){
     	String dateStr = "2015-12-31 23:59:59";
     	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -473,8 +473,34 @@ public class MainTest {
 		newCache.clear();
 		
 		System.out.println("@"+newCache2);
-    	
-    	
+    }
+    
+    @Test
+    public void testEnum(){
+    	System.out.println(ChannelType.valueOf("memory".toUpperCase()).getChannelClassName());
+    	System.out.println();
+    }
+    
+    public enum ChannelType
+    {
+      OTHER(null), 
+
+      FILE("org.apache.flume.channel.file.FileChannel"), 
+
+      MEMORY("org.apache.flume.channel.MemoryChannel"), 
+
+      JDBC("org.apache.flume.channel.jdbc.JdbcChannel"), 
+
+      SPILLABLEMEMORY("org.apache.flume.channel.SpillableMemoryChannel");
+
+      private final String channelClassName;
+
+      private ChannelType(String channelClassName) { this.channelClassName = channelClassName; }
+
+      public String getChannelClassName()
+      {
+        return this.channelClassName;
+      }
     }
     
 }
