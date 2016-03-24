@@ -1,6 +1,11 @@
 package com.shefron.test.utils;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Container;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -51,19 +56,14 @@ public final class ImageUtils {
 	}
 
 	/**
-	 * 批量压缩源文件
-	 *
-	 * @param orgImages
-	 *            源文件
-	 * @param destWidth
-	 *            生成文件的最大长度
-	 * @param destHeight
-	 *            生成文件的最大宽度
-	 * @param destPrefix
-	 *            生成文件前缀
-	 * @param fileType
-	 *            文件类型:jpg,png等
-	 */
+     * 批量压缩源文件
+     *
+     * @param orgImages 源文件
+     * @param destWidth 生成文件的最大长度
+     * @param destHeight 生成文件的最大宽度
+     * @param destPrefix 生成文件前缀
+     * @param fileType 文件类型:jpg,png等
+     */
 	public static void compressImage(List<File> orgImages, int destWidth,
 									 int destHeight, String destPrefix, String fileType) {
 
@@ -109,17 +109,13 @@ public final class ImageUtils {
 	}
 
 	/**
-	 * 源文件批量添加水印logo
-	 *
-	 * @param orgImages
-	 *            源文件
-	 * @param destPrefix
-	 *            生成文件前缀
-	 * @param fileType
-	 *            生成文件类型:jpg,png等
-	 * @param logoImage
-	 *            水印文件
-	 */
+     * 源文件批量添加水印logo
+     *
+     * @param orgImages 源文件
+     * @param destPrefix 生成文件前缀
+     * @param fileType 生成文件类型:jpg,png等
+     * @param logoImage 水印文件
+     */
 	public static void mark2Image(File[] orgImages, String destPrefix,
 								  String fileType, String logoImage) {
 		try {
@@ -154,7 +150,7 @@ public final class ImageUtils {
 				g.setComposite(AlphaComposite.getInstance(
 						AlphaComposite.SRC_ATOP, 1.0f));
 
-				// 水印位置
+                // 水印位置
 				g.drawImage(watermarkImage, (originalWidth - watermarkWidth),
 						(originalHeight - watermarkHeight+60), watermarkWidth,
 						watermarkHeight, null);
@@ -177,17 +173,13 @@ public final class ImageUtils {
 	}
 
 	/**
-	 * 把源图片适应性的调整到指定背景图片上
-	 *
-	 * @param bgImage
-	 *            背景图片
-	 * @param fileType
-	 *            生成文件类型jpg,png等
-	 * @param images
-	 *            源图片
-	 * @param destPrefix
-	 *            文件名前缀
-	 */
+     * 把源图片适应性的调整到指定背景图片上
+     *
+     * @param bgImage 背景图片
+     * @param fileType 生成文件类型jpg,png等
+     * @param images 源图片
+     * @param destPrefix 文件名前缀
+     */
 	public static void adjustImages(File bgImage, String fileType,
 									File[] images, String destPrefix) {
 		try {
@@ -278,9 +270,9 @@ public final class ImageUtils {
 			}
 		});
 
-		ImageUtils.mark2Image(files, "9_", "jpg", logoImage);
+        ImageUtils.mark2Image(files, "23_", "jpg", logoImage);
 
-		//压缩图片
+        // 压缩图片
 //		handleRGB(fileList);
 //		compressImage(fileList,800,4000,"","jpg");
 
