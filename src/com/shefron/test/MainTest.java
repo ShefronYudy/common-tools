@@ -1,13 +1,16 @@
 package com.shefron.test;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -22,6 +25,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -52,18 +56,65 @@ public class MainTest {
 		}
 	};
 	
-
+	@Test
+	public void testF1(){
+//	    for(int i=1;i<=62*24*6;i++){
+//	        System.out.print(i+",");
+//	    }
+	    String col = "主机|网络\"kdkdk\"不同：\\";
+	    col = col.replace("\\", "\\\\").replace("\"", "\\\"");
+	    System.out.println(col);
+	    System.out.println(UUID.randomUUID().toString().replaceAll("-", "") );
+	}
+	
+	
     public void testF(){
         File dir = new File("E:/temp/res");
-        int i=1;
         for(File file : dir.listFiles()){
-//            if(file.getName().indexOf("_") != -1){
-//                String name = file.getName();//1_11.jpg
-//                int seq = Integer.parseInt(name.substring(2,name.lastIndexOf(".")) );
+            if(file.getName().indexOf(".") != -1){
+                String name = file.getName();//1_11.jpg
                 System.out.println(file.getName());
-                File newFile = new File(dir,"26_"+(i++)+".jpg" );
+                File newFile = new File(dir,"11_"+name.substring(0,name.lastIndexOf("."))+".jpg" );
                 file.renameTo(newFile);
-//            }
+            }
+        }
+    }
+    
+    public void testTimestamp(){
+        System.out.println(Long.toHexString(12L));
+        String hexStr = "\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0C";
+        System.out.println(String.valueOf(Long.parseLong(hexStr, 16)));
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        System.out.println(df.format(new Date()));
+        String timestamp = "20160307080358080070217498";
+        System.out.println(timestamp.substring(0, 17));
+        
+        try {
+            System.out.println(df.format(df.parse("20160307080358080")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void testBytes(){
+        String cf = "cf";
+        System.out.println(cf+"#"+new String(cf.getBytes(Charset.forName("UTF-8")), Charset.forName("UTF-8")));
+        
+    }
+    
+    
+    public void testReadFile(){
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("D:/tmp/uip/responsePayLog_7040_20160307081135879.log"), Charset.forName("UTF-8")));
+            String lineData = null;
+            while ((lineData = reader.readLine()) != null){
+                String[] lineSplit = lineData.split("\t");
+                System.out.println("LineItem:"+Arrays.toString(lineSplit));
+                break;
+            }
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -377,7 +428,6 @@ public class MainTest {
 		/** The other, see JMX java.lang.management */
     }
     
-//    @Test
     public void deserialFile() throws IOException{
     	FileInputStream in = new FileInputStream("D:/tmp/bomc.pf-node01-ngpfserver3.01141740.dat");
     	int maxBlobLength = 100000000;
@@ -397,6 +447,7 @@ public class MainTest {
 				continue;
 			break;
 		} while (true);
+		in.close();
 		if (blob == null){
 			System.out.println("null");
 		}
@@ -419,7 +470,6 @@ public class MainTest {
 		}
     }
     
-//    @Test
     public void testJson(){
     	Calendar today = Calendar.getInstance();
 		long currTime = System.currentTimeMillis();
@@ -434,7 +484,6 @@ public class MainTest {
 		System.out.println(minStr);
     }
     
-//    @Test
     public void testTimeMills(){
     	String dateStr = "2015-12-31 23:59:59";
     	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -446,7 +495,6 @@ public class MainTest {
 		}
     }
     
-//    @Test
     public void testSet(){
     	Set<String> newCache = new HashSet<String>();
     	newCache.add("1");
@@ -475,7 +523,6 @@ public class MainTest {
 		System.out.println("@"+newCache2);
     }
     
-    @Test
     public void testEnum(){
     	System.out.println(ChannelType.valueOf("memory".toUpperCase()).getChannelClassName());
     	System.out.println();
