@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.RandomAccessFile;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
@@ -57,6 +58,28 @@ public class MainTest {
 	};
 	
 	@Test
+	public void testWriteStrToFileheader(){
+	    RandomAccessFile randomFile = null;  
+        try {     
+            // 打开一个随机访问文件流，按读写方式     
+            randomFile = new RandomAccessFile("D:\\workspace\\other\\aca\\data\\test.arff", "rw");     
+            // 将写文件指针移到文件头,会覆盖文件头内容     
+            randomFile.seek(0);
+            String content = "@relation \"aca\"\n\n@attribute \"时间窗\" {1,2,3,4,5,6,7,8,9}\n";
+            randomFile.write(content.getBytes(Charset.forName("UTF-8")));      
+        } catch (IOException e) {     
+            e.printStackTrace();     
+        } finally{  
+            if(randomFile != null){  
+                try {  
+                    randomFile.close();  
+                } catch (IOException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+        }  
+	}
+	
 	public void testF1(){
 //	    for(int i=1;i<=62*24*6;i++){
 //	        System.out.print(i+",");
