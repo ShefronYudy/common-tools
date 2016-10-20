@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
@@ -57,7 +58,32 @@ public class MainTest {
 		}
 	};
 	
-	@Test
+	private String loadList(List<String> strList){
+	    strList.add("1");
+	    strList.add("2");
+	    strList.add("3");
+	    
+	    return "success";
+	}
+	
+	public void testLoadList(){
+	    String str1 = "2016032618";
+	    String str2 = "2016042501";
+	    System.out.println(str1+" "+ str2+" " +str1.compareTo(str2));
+	    try {
+            System.out.println(InetAddress.getLocalHost().getCanonicalHostName().toString());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+	    
+//	    for(int seq=0;seq<10;seq++){
+//	        System.out.println(UUID.randomUUID().toString().concat(String.valueOf(Integer.MAX_VALUE-seq)));
+//	    }
+//	    List<String> list = new ArrayList<String>();
+//	    String msg = loadList(list);
+//	    System.out.println("msg:"+msg+" "+list);
+	}
+	
 	public void testWriteStrToFileheader(){
 	    RandomAccessFile randomFile = null;  
         try {     
@@ -90,14 +116,22 @@ public class MainTest {
 	    System.out.println(UUID.randomUUID().toString().replaceAll("-", "") );
 	}
 	
-	
-    public void testF(){
+	@Test
+    public void testRename(){
+//	    for(int i=0;i<10;i++){
+//	        System.out.println(UUID.randomUUID().toString().replace("-", ""));
+//	    }
         File dir = new File("E:/temp/res");
         for(File file : dir.listFiles()){
             if(file.getName().indexOf(".") != -1){
                 String name = file.getName();//1_11.jpg
-                System.out.println(file.getName());
-                File newFile = new File(dir,"11_"+name.substring(0,name.lastIndexOf("."))+".jpg" );
+                String _name = name.substring(0,name.lastIndexOf("."));//1_11
+                if(_name.length() == 1){
+                    _name = "00"+_name;
+                }else if(_name.length() == 2){
+                    _name = "0"+_name;
+                }
+                File newFile = new File(dir,_name+".jpg" );
                 file.renameTo(newFile);
             }
         }
@@ -128,7 +162,7 @@ public class MainTest {
     
     public void testReadFile(){
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("D:/tmp/uip/responsePayLog_7040_20160307081135879.log"), Charset.forName("UTF-8")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:/tmp/uip/responsePayLog_7040_20160307081135879.log"), Charset.forName("UTF-8")));
             String lineData = null;
             while ((lineData = reader.readLine()) != null){
                 String[] lineSplit = lineData.split("\t");
@@ -452,7 +486,7 @@ public class MainTest {
     }
     
     public void deserialFile() throws IOException{
-    	FileInputStream in = new FileInputStream("D:/tmp/bomc.pf-node01-ngpfserver3.01141740.dat");
+    	FileInputStream in = new FileInputStream("D:/tmp/crm/bomc.app-node45-srv05.09271930_10.154.89.45.dat");
     	int maxBlobLength = 100000000;
     	
     	ByteArrayOutputStream blob = null;
@@ -493,6 +527,7 @@ public class MainTest {
 		}
     }
     
+    @Test
     public void testJson(){
     	Calendar today = Calendar.getInstance();
 		long currTime = System.currentTimeMillis();
@@ -505,6 +540,7 @@ public class MainTest {
 			minStr = ""+(currMin/10)*10;
 		}
 		System.out.println(minStr);
+		System.out.println(new Date(1474976400307L));
     }
     
     public void testTimeMills(){

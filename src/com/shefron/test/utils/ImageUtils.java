@@ -12,9 +12,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -252,29 +249,57 @@ public final class ImageUtils {
 
 		return (BufferedImage) scaledImage;
 	}
+	
+	private static void weixinReCreateImg(){
+	    File dir = new File("E:/temp/res");
+        File[] files = dir.listFiles();
+        BufferedImage orgImg = null;
+        BufferedImage newImage = null;
+        for(File file : files){
+            try {
+                orgImg = ImageIO.read(file);
+                newImage = new BufferedImage(orgImg.getWidth(null), orgImg.getHeight(null), BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = newImage.createGraphics();
+                g.drawImage(orgImg, 0, 0, orgImg.getWidth(null), orgImg.getHeight(null), null);
+                g.dispose();
+                
+                ImageIO.write(newImage, "jpg", new FileOutputStream((file
+                        .getParentFile()
+                        + File.separator + "_" + file.getName())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+	
+	private static void markList(){
+	       String logoImage = ImageUtils.class.getResource("/resource/watermark.png").getPath();
+	        File dir = new File("E:/temp/res");
+	        File[] files = dir.listFiles();
+
+//	        List<File> fileList = Arrays.asList(files);
+//
+//	        Collections.sort(fileList,new Comparator<File>(){
+//	            public int compare(File o1, File o2) {
+//	                int seq1 = Integer.parseInt(o1.getName().substring(0, o1.getName().lastIndexOf('.')));
+//	                int seq2 = Integer.parseInt(o2.getName().substring(0, o2.getName().lastIndexOf('.')));
+//
+//	                return seq1>seq2?1:-1;
+//	            }
+//	        });
+
+        ImageUtils.mark2Image(files, "", "jpg", logoImage);
+
+        // 压缩图片
+//	      handleRGB(fileList);
+//	      compressImage(fileList,800,4000,"","jpg");
+	}
 
 
 	public static void main(String[] args){
-		String logoImage = ImageUtils.class.getResource("/resource/watermark.png").getPath();
-		File dir = new File("E:/temp/res");
-		File[] files = dir.listFiles();
-
-		List<File> fileList = Arrays.asList(files);
-
-		Collections.sort(fileList,new Comparator<File>(){
-			public int compare(File o1, File o2) {
-				int seq1 = Integer.parseInt(o1.getName().substring(0, o1.getName().lastIndexOf('.')));
-				int seq2 = Integer.parseInt(o2.getName().substring(0, o2.getName().lastIndexOf('.')));
-
-				return seq1>seq2?1:-1;
-			}
-		});
-
-        ImageUtils.mark2Image(files, "23_", "jpg", logoImage);
-
-        // 压缩图片
-//		handleRGB(fileList);
-//		compressImage(fileList,800,4000,"","jpg");
+	    markList();
+	    
+//	    weixinReCreateImg();
 
 	}
 
