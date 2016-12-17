@@ -10,17 +10,21 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.GZIPInputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileSystemView;
@@ -373,7 +377,7 @@ public class MainTest {
 		/** The other, see JMX java.lang.management */
     }
     
-    @Test
+//    @Test
     public void deserialFile() throws IOException{
     	FileInputStream in = new FileInputStream("D:/tmp/bomc.pf-node01-ngpfserver3.01141740.dat");
     	int maxBlobLength = 100000000;
@@ -414,4 +418,63 @@ public class MainTest {
 			bis.close();
 		}
     }
+    
+//    @Test
+    public void testJson(){
+    	Calendar today = Calendar.getInstance();
+		long currTime = System.currentTimeMillis();
+		today.setTimeInMillis(currTime);
+		long currMin = today.get(Calendar.MINUTE);
+		String minStr = "";
+		if(currMin < 10){
+			minStr = "00";
+		}else{
+			minStr = ""+(currMin/10)*10;
+		}
+		System.out.println(minStr);
+    }
+    
+    @Test
+    public void testTimeMills(){
+    	String dateStr = "2015-12-31 23:59:59";
+    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	try {
+			Date date = df.parse(dateStr);
+			System.out.println("2015-12-31 23:59:59：" + date.getTime()+999);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    }
+    
+//    @Test
+    public void testSet(){
+    	Set<String> newCache = new HashSet<String>();
+    	newCache.add("1");
+    	newCache.add("2");
+    	newCache.add("3");
+    	
+    	Set<String> newCache2 = new HashSet<String>();
+    	newCache2.add("1");
+    	newCache2.add("2");
+    	newCache2.add("3");
+    	newCache2.add("4");
+    	
+    	newCache2.removeAll(newCache);
+		for (String _jobid : newCache2) {
+			try {
+				System.out.println("#"+_jobid);
+			} catch (Throwable e) {
+			}
+		}
+    	
+    	
+		newCache2.clear();
+		newCache2.addAll(newCache);
+		newCache.clear();
+		
+		System.out.println("@"+newCache2);
+    	
+    	
+    }
+    
 }
